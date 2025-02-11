@@ -42,7 +42,7 @@ app.post("/process-text", (req, res) => {
   res.json({ original: text, transformed: processedText });
 });
 
-// 4. **Get Server Status**
+
 app.get("/status", (req, res) => {
   res.json({ status: "Server is running!", uptime: process.uptime() });
 });
