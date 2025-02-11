@@ -47,7 +47,7 @@ app.get("/status", (req, res) => {
   res.json({ status: "Server is running!", uptime: process.uptime() });
 });
 
-// Start Server
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
