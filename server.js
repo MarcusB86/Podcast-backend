@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
+const { processTextWithGemini } = require("./geminiHelper");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -31,16 +32,27 @@ app.post("/upload", upload.single("audio"), (req, res) => {
 });
 
 // 3. **Process Text (Placeholder for AI Integration)**
-app.post("/process-text", (req, res) => {
-  const { text } = req.body;
-  if (!text) {
-    return res.status(400).json({ error: "No text provided" });
-  }
+app.post("/process-text", async (req, res) => {
+  try {
+    const { text } = req.body;
+    if (!text) {
+      return res.status(400).json({ error: "No text provided" });
+    }
 
-  // Simulating text processing (AI integration goes here)
-  const processedText = text.toUpperCase(); // Example transformation
-  res.json({ original: text, transformed: processedText });
+    const transformedText = await processTextWithGemini(text);
+
+    if (!transformedText) {
+      return res.status(500).json({ error: "Failed to process text." });
+    }
+
+    res.json({ original: text, transformed: transformedText });
+
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
+
 
 
 app.get("/status", (req, res) => {
