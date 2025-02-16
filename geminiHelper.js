@@ -1,23 +1,3 @@
-// require("dotenv").config();
-// const { GoogleGenerativeAI } = require("@google/generative-ai");
-
-// const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
-// // Function to process text with Gemini API
-// async function processTextWithGemini(inputText) {
-//   try {
-//     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-//     const result = await model.generateContent(inputText);
-//     const response = result.response;
-//     return response.text();
-//   } catch (error) {
-//     console.error("Error with Gemini API:", error);
-//     return "Error processing text.";
-//   }
-// }
-
-// module.exports = { processTextWithGemini };
 require("dotenv").config();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
